@@ -10,29 +10,35 @@ import java.util.logging.Logger;
 
 public class Conection {
 
-//Variable de instancia única
+    //Variable de instancia propia de ésta clase
     private static Conection c;
-//Variable para hacer la conexión
+    //Declaramos variable para hacer la conexión y es propia del JDBC 
     private Connection cx = null;
-
+    //Constructor de la clase, es privado porque queremos que sólo podamos acceder a él a través del método getInstance()
     private Conection() {
         try {
+            //Nombre del JDBC que estamos ocupando
             Class.forName("org.postgresql.Driver");
+            //Cadena de conexión que incluye la ubicación de la base de datos, nombre de usuario y la contraseña para acceder
             cx = DriverManager.getConnection("jdbc:postgresql://localhost:5432/taqueria", "postgres", "12334");
+            //Este mensaje se muestra cuando se realice la conexión sin problemas
             System.out.println("-Conectado-");
         } catch (ClassNotFoundException | SQLException ex) {
             Logger.getLogger(Conection.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-
+    
+    //Aquí se presenta el patrón singleton, verificamos que ya se haya creado una instancia de ésta clase para devolverla y en caso
+    //contrario la creamos y devolvemos, al hacerlo podemos acceder a los métodos de abajo.
     public static Conection getInstance() {
         if (c == null) {
             c = new Conection();
         }
         return c;
     }
-
-    //Statement(Sentencias SQL):  Insert, Delete, Update => De actualización
+    
+    //Método que nos permite ejecutar las sentencias de actualización a nuestra base de datos, recibe una cadena de caracteres (la sentencia) y la ejecuta
+    //Statement(Sentencias SQL):  Insert, Delete, Update => Sentencias de actualización
     public boolean execute(String sql) {
         boolean res = false;
         try {
@@ -44,8 +50,9 @@ public class Conection {
         }
         return res;
     }
-
-    //Statement(Sentencia SQL): Select => De consulta
+    
+    //Método que recibe una cadena de caracteres para consultar la base de datos, permite obtener uno o varios registros de la base de datos
+    //Statement(Sentencia SQL): Select => Sentencia de consulta
     //ResultSet: almacena de forma temporal el resultado de la consulta Select y permite recorrer la información obtenida.
     public ResultSet executeQuery(String sql) {
         ResultSet res = null;
@@ -57,5 +64,4 @@ public class Conection {
         }
         return res;
     }
-
 }
