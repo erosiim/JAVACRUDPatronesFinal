@@ -6,7 +6,7 @@ package crudpatrones;
  */
 public class Taco {
     private int id;
-    private String sabor;
+    private String tipo;
     private int precio;
     
     public int getId() {
@@ -17,12 +17,12 @@ public class Taco {
         this.id = id;
     }
 
-    public String getSabor() {
-        return sabor;
+    public String getTipo() {
+        return tipo;
     }
 
-    public void setSabor(String sabor) {
-        this.sabor = sabor;
+    public void setTipo(String sabor) {
+        this.tipo = sabor;
     }
 
     public int getPrecio() {
