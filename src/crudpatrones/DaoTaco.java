@@ -9,7 +9,7 @@ import java.sql.ResultSet;
 /*Uso de palabra reservada "implementes" seguido de la interface creada anteriormente; en el medio del símbolo diamante se incluirá
 * el objeto que necesitemos. Notar que en los métodos se se genera el parámetro que necesitamos automáticamente
  */
-public class DaoTaco implements IDAO<Taco> {
+public class DaoTaco implements IDAO<Taco>{
 
     //Variable para manipular la conexión a nuestra base de datos y sus métodos
     private Conection con = Conection.getInstance();
